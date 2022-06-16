@@ -141,8 +141,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onTap: () {},
                         child: Container(
                           alignment: Alignment.center,
-                          height: _height * 0.1,
-                          width: _width * 0.75,
+                          height: _height * 0.07,
+                          width: _width * 0.50,
                           decoration: BoxDecoration(
                               color: appModel.primaryColor,
                               borderRadius: BorderRadius.circular(40)),
@@ -150,10 +150,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             "Sign up",
                             style: appModel.headingText.copyWith(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                          "----------------------- or ------------------------"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Already have an account? "),
+                          GestureDetector(
+                            onTap: () {
+                              print("Hello");
+                            },
+                            child: Text(
+                              "Log in",
+                              style: appModel.headingText,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
