@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:siyu_shopping/pages/homepage.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -29,13 +30,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 padding: const EdgeInsets.only(top: 100, bottom: 20),
                 child: Image.asset(
                   "assets/images/logo.png",
-                  color: appModel.primaryColor,
+                  color: AppModel.primaryColor,
                   height: 100,
                 ),
               ),
               Text(
                 "Sign Up",
-                style: appModel.headingText.copyWith(fontSize: 30),
+                style: AppModel.headingText.copyWith(fontSize: 30),
               ),
               Padding(
                 padding:
@@ -58,7 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           border: InputBorder.none,
                           prefixIcon: Icon(
                             Icons.manage_accounts,
-                            color: appModel.primaryColor,
+                            color: AppModel.primaryColor,
                             size: 35,
                           ),
                         ),
@@ -83,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           border: InputBorder.none,
                           prefixIcon: Icon(
                             Icons.email_outlined,
-                            color: appModel.primaryColor,
+                            color: AppModel.primaryColor,
                             size: 35,
                           ),
                         ),
@@ -109,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           border: InputBorder.none,
                           prefixIcon: Icon(
                             Icons.lock_rounded,
-                            color: appModel.primaryColor,
+                            color: AppModel.primaryColor,
                             size: 35,
                           ),
                         ),
@@ -120,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Checkbox(
                           splashRadius: 50,
                           checkColor: Colors.white,
-                          activeColor: appModel.primaryColor,
+                          activeColor: AppModel.primaryColor,
                           value: isChecked,
                           onChanged: (bool? value) {
                             setState(() {
@@ -131,24 +132,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text("i accept all the "),
                         Text(
                           "Tearms & Conditions",
-                          style: appModel.headingText,
+                          style: AppModel.headingText.copyWith(fontSize: 13),
                         ),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => HomePage()));
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           height: _height * 0.07,
                           width: _width * 0.50,
                           decoration: BoxDecoration(
-                              color: appModel.primaryColor,
+                              color: AppModel.primaryColor,
                               borderRadius: BorderRadius.circular(40)),
                           child: Text(
                             "Sign up",
-                            style: appModel.headingText.copyWith(
+                            style: AppModel.headingText.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500),
@@ -173,7 +177,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               "Log in",
-                              style: appModel.headingText,
+                              style:
+                                  AppModel.headingText.copyWith(fontSize: 15),
                             ),
                           ),
                         ],
