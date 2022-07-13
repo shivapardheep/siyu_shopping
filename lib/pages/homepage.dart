@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                _mainDressWidget(),
+                Center(child: _mainDressWidget(_height, _width)),
               ],
             ),
           ),
@@ -80,46 +80,55 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding _mainDressWidget() {
+  Padding _mainDressWidget(_height, _width) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Wrap(
+        alignment: WrapAlignment.center,
         children: [
           _dressMiniWidget(
             "assets/images/product_0.png",
             Colors.grey,
             "Long Sleeve Shirt",
             "\$165",
+            _height,
+            _width,
           ),
           _dressMiniWidget(
             "assets/images/product_1.png",
             Colors.grey,
             "Casual Henley Shirt",
             "\$275",
+            _height,
+            _width,
           ),
           _dressMiniWidget(
             "assets/images/product_2.png",
             Colors.grey,
             "Curved Hem Shirt",
             "\$105",
+            _height,
+            _width,
           ),
           _dressMiniWidget(
             "assets/images/product_3.png",
             Colors.grey,
             "Casual Nolin",
             "\335",
+            _height,
+            _width,
           ),
         ],
       ),
     );
   }
 
-  Padding _dressMiniWidget(image, color, name, price) {
+  Padding _dressMiniWidget(image, color, name, price, _height, _width) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Container(
         height: 250,
-        width: 160,
+        width: _width * 0.45,
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
