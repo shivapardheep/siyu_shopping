@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:siyu_shopping/pages/home%20page/homepage.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
 
@@ -12,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isChecked = false;
+  var get = Get;
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
@@ -140,8 +142,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => HomePage()));
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (_) => HomePage()));
+                          get.to(const HomePage());
                         },
                         child: Container(
                           alignment: Alignment.center,

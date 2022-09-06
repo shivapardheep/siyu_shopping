@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
+
+import '../../services/controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  var dressCategoryIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,11 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Center(child: _mainDressWidget(_height, _width)),
+                Obx(
+                  () => dressCategoryIndex.value == 1
+                      ? Center(child: _mainDressWidget(_height, _width))
+                      : Container(),
+                ),
               ],
             ),
           ),
@@ -142,8 +150,9 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               decoration: BoxDecoration(
                   color: color, borderRadius: BorderRadius.circular(10)),
-              child: Image.asset(
-                image,
+              child: Image.network(
+                "https://cdn.shopify.com/s/files/1/0752/6435/products/3_d8ea692a-1ae6-4b5c-8e4b-12e15825841c_765x.jpg?v=1648053416.jpg",
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(
@@ -197,38 +206,58 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            _dressMiniCategory("assets/icons/dress.svg", "Dress"),
-            _dressMiniCategory("assets/icons/shirt.svg", "Shirt"),
-            _dressMiniCategory("assets/icons/pants.svg", "Pants"),
-            _dressMiniCategory("assets/icons/Tshirt.svg", "Tshirt"),
+            _dressMiniCategory("assets/icons/dress.svg", "Dress", () {
+              dressCategoryIndex.value = 0;
+              // print(dressCategoryIndex.value);
+            }, 0),
+            _dressMiniCategory("assets/icons/shirt.svg", "Shirt", () {
+              dressCategoryIndex.value = 1;
+              FirebaseController().fetchData();
+              // print(dressCategoryIndex.value);
+            }, 1),
+            _dressMiniCategory("assets/icons/pants.svg", "Pants", () {
+              dressCategoryIndex.value = 2;
+              // print(dressCategoryIndex.value);
+            }, 2),
+            _dressMiniCategory("assets/icons/Tshirt.svg", "Tshirt", () {
+              dressCategoryIndex.value = 3;
+              // print(dressCategoryIndex.value);
+            }, 3),
           ],
         ),
       ),
     );
   }
 
-  Padding _dressMiniCategory(image, name) {
+  Padding _dressMiniCategory(image, name, ontap, [active]) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Container(
-        height: 80,
-        width: 80,
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(image),
-            const SizedBox(
-              height: 8,
+      child: InkWell(
+          onTap: ontap,
+          child: Obx(
+            () => Container(
+              height: 80,
+              width: 80,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: active == dressCategoryIndex.value
+                    ? AppModel.primaryColor
+                    : Colors.white,
+                // border: Border.all(color: Colors.black87, width: 2),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(image),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(name)
+                ],
+              ),
             ),
-            Text(name)
-          ],
-        ),
-      ),
+          )),
     );
   }
 

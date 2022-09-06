@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "224166967865",
+    "firebase_url": "https://fluttercrud-2a2da-default-rtdb.firebaseio.com",
+    "project_id": "fluttercrud-2a2da",
+    "storage_bucket": "fluttercrud-2a2da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224166967865:android:6a0a97229676038a736be8",
+        "android_client_info": {
+          "package_name": "com.example.crud_operation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224166967865-nsmii5v0ivjush7km1a8eua3cllikcu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.crud_operation",
+            "certificate_hash": "edd307575cd4c1577bea8c0e77475207d14bc89b"
+          }
+        },
+        {
+          "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAqKScwzGNtZptBmDrYO9VN5uan1QhBVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224166967865:android:386f291e74109e40736be8",
+        "android_client_info": {
+          "package_name": "com.example.siyu_shopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAqKScwzGNtZptBmDrYO9VN5uan1QhBVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224166967865:android:704594ca81550bf4736be8",
+        "android_client_info": {
+          "package_name": "com.susiempire.login_ui_testing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAqKScwzGNtZptBmDrYO9VN5uan1QhBVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224166967865-qsr59el5ed5o1idi6m0u326a18t7cmde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
