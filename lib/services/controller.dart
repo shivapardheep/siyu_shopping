@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class FirebaseController extends GetxController {
-  CollectionReference users = FirebaseFirestore.instance.collection('dress');
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('employees');
 
   fetchData() {
     print("called");
 
     FutureBuilder<DocumentSnapshot>(
-      future: users.doc("shirt").get(),
+      future: users.doc("ram@gmail.com").get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -27,10 +28,10 @@ class FirebaseController extends GetxController {
           print("--------------------------");
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
+          return Text("data is : ${data.keys}");
         }
 
-        return Text("loading");
+        return const Text("loading");
       },
     );
   }

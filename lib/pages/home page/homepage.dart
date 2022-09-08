@@ -20,13 +20,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Container(
-          height: _height,
-          width: _width,
+          height: height,
+          width: width,
           color: Colors.grey[200],
           child: SingleChildScrollView(
             child: Column(
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                _searchBoxWidget(_width),
+                _searchBoxWidget(width),
                 const SizedBox(
                   height: 20,
                 ),
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Obx(
                   () => dressCategoryIndex.value == 1
-                      ? Center(child: _mainDressWidget(_height, _width))
+                      ? Center(child: _mainDressWidget(height, width))
                       : Container(),
                 ),
               ],

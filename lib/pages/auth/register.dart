@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:siyu_shopping/pages/home%20page/homepage.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
+import 'package:siyu_shopping/pages/rough%20pages/rough.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -46,8 +46,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       height: 60,
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -144,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onTap: () {
                           // Navigator.push(context,
                           //     MaterialPageRoute(builder: (_) => HomePage()));
-                          get.to(const HomePage());
+                          get.to(const RoughFirestore());
                         },
                         child: Container(
                           alignment: Alignment.center,
