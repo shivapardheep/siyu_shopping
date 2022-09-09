@@ -2,43 +2,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../pages/classes/shirtClass.dart';
+
 class FirebaseController extends GetxController {
   CollectionReference users =
       FirebaseFirestore.instance.collection('employees');
 
-  fetchData() {
-    print("called");
+  Future<List<ShirtClass>> fetchDatabase() async {
+    List<ShirtClass> instanceList = [];
 
-    FutureBuilder<DocumentSnapshot>(
-      future: users.doc("ram@gmail.com").get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          print("error");
-          return const Text("Something went wrong");
-        }
-
-        if (snapshot.hasData && !snapshot.data!.exists) {
-          print("error");
-
-          return const Text("Document does not exist");
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          print("--------------------------");
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return Text("data is : ${data.keys}");
-        }
-
-        return const Text("loading");
-      },
-    );
+    await FirebaseFirestore.instance
+        .collection('dress')
+        .doc('shirt')
+        .collection("checked shirt")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        // print("element : ${element.data()}");
+        Map<String, dynamic> data = element.data();
+        ShirtClass instance = ShirtClass.fromJson(data);
+        instanceList.add(instance);
+      }
+    });
+    return instanceList;
   }
 
   @override
   void onInit() {
-    fetchData();
+    fetchDatabase();
     super.onInit();
   }
 }

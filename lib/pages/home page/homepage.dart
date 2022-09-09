@@ -2,9 +2,10 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:siyu_shopping/pages/classes/shirtClass.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
 
-import '../../services/controller.dart';
+import '../../services/dress_datas.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,8 +16,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _page = 0;
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   var dressCategoryIndex = 0.obs;
+  final ShirtDataList = <ShirtClass>[].obs;
+  getShirtData() async {
+    ShirtDataList.value = await DressDatas.instance.fetchDatabase();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +64,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Obx(
                   () => dressCategoryIndex.value == 1
-                      ? Center(child: _mainDressWidget(height, width))
-                      : Container(),
+                      ? ShirtDataList.isEmpty
+                          ? const Center(child: CircularProgressIndicator())
+                          : Center(
+                              child: _mainDressWidget(
+                                  height, width, ShirtDataList))
+                      : const Text(""),
                 ),
               ],
             ),
@@ -88,56 +102,68 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding _mainDressWidget(_height, _width) {
+  Padding _mainDressWidget(_height, _width, List<ShirtClass> shirtdatalist) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        children: [
-          _dressMiniWidget(
-            "assets/images/product_0.png",
-            Colors.grey,
-            "Long Sleeve Shirt",
-            "\$165",
-            _height,
-            _width,
-          ),
-          _dressMiniWidget(
-            "assets/images/product_1.png",
-            Colors.grey,
-            "Casual Henley Shirt",
-            "\$275",
-            _height,
-            _width,
-          ),
-          _dressMiniWidget(
-            "assets/images/product_2.png",
-            Colors.grey,
-            "Curved Hem Shirt",
-            "\$105",
-            _height,
-            _width,
-          ),
-          _dressMiniWidget(
-            "assets/images/product_3.png",
-            Colors.grey,
-            "Casual Nolin",
-            "\335",
-            _height,
-            _width,
-          ),
-        ],
-      ),
-    );
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+            // color: Colors.green,
+            // height: _height * 0.5,
+            width: _width,
+            child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 10,
+                runSpacing: 10,
+                children: List.generate(
+                  ShirtDataList.length,
+                  (index) => _dressMiniWidget(
+                    ShirtDataList[index].image,
+                    Colors.grey,
+                    ShirtDataList[index].name,
+                    "\$${ShirtDataList[index].price}",
+                    _height,
+                    _width,
+                  ),
+                )
+
+                // Container(
+                //     color: Colors.blue,
+                //     width: _width / 2.2,
+                //     height: 100,
+                //     child: const Center(
+                //         child: Text(
+                //       "W1",
+                //       textScaleFactor: 2.5,
+                //     ))),
+
+                //   _dressMiniWidget(
+                //   ShirtDataList[index].image,
+                //   Colors.grey,
+                //   ShirtDataList[index].name,
+                //   "\$${ShirtDataList[index].price}",
+                //   _height,
+                //   _width,
+                // ),
+                // ],
+                )));
+    // [
+    // _dressMiniWidget(
+    //   ShirtDataList[index].image,
+    //   Colors.grey,
+    //   ShirtDataList[index].name,
+    //   "\$${ShirtDataList[index].price}",
+    //   _height,
+    //   _width,
+    // );
+    // ],
   }
 
   Padding _dressMiniWidget(image, color, name, price, _height, _width) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: Container(
-        height: 250,
-        width: _width * 0.45,
-        padding: EdgeInsets.all(8),
+        height: 200,
+        width: _width / 2.2,
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -146,13 +172,13 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 180,
+              height: 130,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: color, borderRadius: BorderRadius.circular(10)),
               child: Image.network(
-                "https://cdn.shopify.com/s/files/1/0752/6435/products/3_d8ea692a-1ae6-4b5c-8e4b-12e15825841c_765x.jpg?v=1648053416.jpg",
-                fit: BoxFit.cover,
+                image,
+                fit: BoxFit.fill,
               ),
             ),
             const SizedBox(
@@ -169,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   price,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             )
@@ -211,8 +237,11 @@ class _HomePageState extends State<HomePage> {
               // print(dressCategoryIndex.value);
             }, 0),
             _dressMiniCategory("assets/icons/shirt.svg", "Shirt", () {
+              // setState(() {
               dressCategoryIndex.value = 1;
-              FirebaseController().fetchData();
+              getShirtData();
+              // });
+
               // print(dressCategoryIndex.value);
             }, 1),
             _dressMiniCategory("assets/icons/pants.svg", "Pants", () {

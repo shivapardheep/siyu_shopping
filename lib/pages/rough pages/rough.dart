@@ -9,17 +9,15 @@ class RoughFirestore extends StatefulWidget {
 }
 
 class _RoughFirestoreState extends State<RoughFirestore> {
-  // DressDatas dressDatas = DressDatas();
   getShirtData() async {
-    var shirtDatas = DressDatas().fetchDatabase().then((value) {
-      print("==================================: ${value}");
-    });
-    // print("==================================: ${shirtDatas}");
+    var a = await DressDatas.instance.fetchDatabase();
+    print("---------------------------${a[0].colors}");
   }
 
   @override
   void initState() {
     getShirtData();
+    // DressDatas.instance.fetchDatabase();
     super.initState();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:siyu_shopping/pages/home%20page/homepage.dart';
 import 'package:siyu_shopping/pages/modules/model.dart';
 import 'package:siyu_shopping/pages/rough%20pages/rough.dart';
 
@@ -144,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onTap: () {
                           // Navigator.push(context,
                           //     MaterialPageRoute(builder: (_) => HomePage()));
-                          get.to(const RoughFirestore());
+                          get.to(const HomePage());
                         },
                         child: Container(
                           alignment: Alignment.center,
